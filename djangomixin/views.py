@@ -1,5 +1,9 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView , ListView
 from .mixin import OneRequired
+
+from .models import Person
+
+
 
 class PageView(OneRequired , TemplateView):
     template_name = 'djangomixin/pageview.htm'
@@ -9,4 +13,10 @@ class PageView(OneRequired , TemplateView):
         context = super().get_context_data(**kwargs)
         context["your_thought"] = kwargs.get('id')
         return context
+
+
+class PersonListView(ListView):
+    model = Person
+    context_object_name = 'persons'
+    template_name = 'djangomixin/list.htm'
     
